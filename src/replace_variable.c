@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/11 22:56:55 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/12 12:43:23 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/13 02:18:28 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -46,7 +46,7 @@ void			ft_replace_variable(char **line)
 
 static void		ft_instring(char *quote, char c, char d)
 {
-	if (*quote == '\0' && ft_strchr("\"'", c))
+	if (*quote == '\0' && c == '\'')
 		*quote = c;
 	else if (*quote == c && d != '\\')
 		*quote =  '\0';
@@ -60,7 +60,8 @@ static char		*ft_get_var(char *s)
 	j = 0;
 	s++;
 	while (*s != ' ' && *s != '\n' && *s != '\0' && *s != '/'
-		&& *s != '<' && *s != '>' && *s != '|')
+		   && *s != '<' && *s != '>' && *s != '|' && *s != '"'
+		   && *s != '\'' && *s != '`')
 	{
 		buf[j] = *s;
 		s++;
@@ -81,8 +82,10 @@ static int		ft_cat_var(char *str, int *i, char *buf)
 	count++;
 	if (var)
 	{
-		while (*str != ' ' && *str != '\n' && *str != '\0' && *str != '/'
-			&& *str != '<' && *str != '>' && *str != '|')
+		while (*str != ' ' && *str != '\n' && *str != '\0'
+			&& *str != '/' && *str != '<' && *str != '>'
+			&& *str != '|' && *str != '"' && *str != '\''
+			&& *str != '`')
 		{
 			str++;
 			count++;
