@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/03 09:21:19 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/10 12:50:29 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/13 13:26:00 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <signal.h>
@@ -99,8 +99,6 @@ static void			ft_do_resume(int num)
 		ft_putstr(C_RESET);
 	kill(g_env.thread, SIGCONT);
 	waitpid(g_env.thread, &status, WUNTRACED);
-	if (ft_strcmp(g_env.in_exec, "cat") == 0)
-		ft_putchar('\n');
 	if (status == 0)
 		ft_got_node_nbr();
 	g_env.in_exec = NULL;

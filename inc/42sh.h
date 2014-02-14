@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 15:39:58 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/13 00:54:44 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/14 04:09:34 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,6 +163,10 @@ void		ft_do_replacements(char**line);
 void		ft_replace_tilde(char **line);
 void		ft_replace_variable(char **line);
 void		ft_replace_alias(char **line);
+void		ft_replace_star(char **line);
+char		*ft_replace_star_2(char *path, char *stared, int *j, char *str);
+void		ft_update_stared_line(char **line, char *new, int i);
 char		**ft_split_args(char *str);
+int			ft_echo(char **av);
 
 #endif /* !__42SH_H__ */

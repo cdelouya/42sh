@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/11 22:30:21 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/13 10:45:32 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/14 04:25:15 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -20,4 +20,6 @@ void		ft_do_replacements(char **line)
 		ft_replace_tilde(line);
 	if (ft_strchr(*line, '$'))
 		ft_replace_variable(line);
+	if (ft_strchr(*line, '*'))
+		ft_replace_star(line);
 }

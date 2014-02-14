@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/02 22:45:07 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/13 01:40:58 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/13 13:33:12 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <signal.h>
@@ -55,7 +55,7 @@ void			ft_suspend(int sig)
 	{
 		ft_add_to_pid_list(g_env.thread, g_env.in_exec);
 		ioctl(0, TIOCSTI, cp);
-		ft_printf("%$\n42sh: Suspended > %s%$"\
+		ft_printf("%$\n42sh: Suspended > %s%$\n"\
 			, F_GREEN, g_env.in_exec, C_RESET);
 		g_env.in_exec = NULL;
 	}

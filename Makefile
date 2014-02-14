@@ -6,7 +6,7 @@
 #    By: hestela <hestela@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/01/28 10:07:14 by hestela           #+#    #+#              #
-#    Updated: 2014/02/13 00:55:19 by hestela          ###   ########.fr        #
+#    Updated: 2014/02/14 04:11:24 by hestela          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -50,7 +50,10 @@ SOURCES = src/main.c \
 		src/replace_tilde.c \
 		src/replace_variable.c \
 		src/replace_alias.c \
-		src/split_args.c
+		src/replace_star.c \
+		src/replace_star_suite.c \
+		src/split_args.c \
+		src/echo.c
 
 HEADERS = inc/
 

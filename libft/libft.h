@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/20 08:44:19 by hestela           #+#    #+#             */
-/*   Updated: 2014/01/29 18:22:18 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/14 02:11:28 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ int			ft_strequ(char const *s1, char const *s2);
 int			ft_strnequ(char const *s1, char const *s2, size_t n);
 int			ft_strequ_case(char const *s1, char const *s2);
 int			ft_strnequ_case(char const *s1, char const *s2, size_t n);
+int			ft_match(char *s1, char *s2);
 
 /*
 ** Memory functions
@@ -173,7 +174,6 @@ char		*ft_strndup(char const *s1, size_t n);
 char		*ft_strchr(const char *s, int c);
 char		*ft_strrchr(const char *s, int c);
 size_t		ft_strlen(const char *s);
-
 char		*ft_strnew(size_t size);
 void		ft_strdel(char **as);
 void		ft_strclr(char *s);
@@ -183,6 +183,7 @@ char		*ft_strmap(char const *s, char (*f)(char));
 char		*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char		*ft_strsub(char const *s, unsigned int start, size_t len);
 char		*ft_strjoin(char const *s1, char const *s2);
+char		*ft_str_multi_join(int ac, ...);
 char		*ft_strtrim(char const *s);
 char		**ft_strsplit(char const *s, char c);
 

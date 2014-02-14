@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 19:22:55 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/11 21:00:09 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/13 23:51:16 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
@@ -55,8 +55,6 @@ static void		ft_restore_term_for_exec(char *cmd, int *status)
 	tcsetattr(0, 0, g_env.term);
 	g_env.in_exec = cmd;
 	waitpid(g_env.thread, status, WUNTRACED);
-	if (ft_strcmp(g_env.in_exec, "cat") == 0)
-		ft_putchar('\n');
 	g_env.in_exec = NULL;
 	tcgetattr(0, g_env.term);
 	g_env.term->c_lflag &= ~(ICANON);
@@ -70,25 +68,27 @@ static void		ft_restore_term_for_exec(char *cmd, int *status)
 
 int				ft_builtin(char **av)
 {
-	if (ft_strcmp("env", av[0]) == 0 || ft_strcmp("ENV", av[0]) == 0)
+	if (ft_strcmp_case("env", av[0]) == 0)
 		ft_env(av, g_env.env);
-	else if (ft_strcmp("cd", av[0]) == 0 || ft_strcmp("CD", av[0]) == 0)
+	else if (ft_strcmp_case("echo", av[0]) == 0)
+		ft_echo(av);
+	else if (ft_strcmp_case("cd", av[0]) == 0)
 		ft_cd(av, g_env.env);
-	else if (ft_strcmp("unsetenv", av[0]) == 0)
+	else if (ft_strcmp_case("unsetenv", av[0]) == 0)
 	{
 		g_env.env = ft_unsetenv(av, g_env.env);
 		ft_env_changes();
 	}
-	else if (ft_strcmp("setenv", av[0]) == 0)
+	else if (ft_strcmp_case("setenv", av[0]) == 0)
 	{
 		g_env.env = ft_setenv(av, g_env.env);
 		ft_env_changes();
 	}
-	else if (ft_strcmp("exit", av[0]) == 0)
+	else if (ft_strcmp_case("exit", av[0]) == 0)
 		ft_exit(av, 1);
-	else if (ft_strcmp("fg", av[0]) == 0)
+	else if (ft_strcmp_case("fg", av[0]) == 0)
 		ft_resume(av);
-	else if (ft_strcmp("jobs", av[0]) == 0)
+	else if (ft_strcmp_case("jobs", av[0]) == 0)
 		ft_print_job_list();
 	else
 		return (0);

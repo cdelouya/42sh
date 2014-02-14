@@ -24,6 +24,7 @@ builtins:
           exit  > terminate process
             fg  >  resume process  //// NOTE: (fg [number of suspended job])
           jobs  > show list of suspended jobs
+          echo  > write in stdout
 
 signals:
 
@@ -44,6 +45,7 @@ redirections:
 		ex: ls|cat -e;echo ">>\";|"
 -> alias are replaced
 -> ~ is replaced
+-> * are replaced
 -> environement variables are replaced
 -> verifying permission for complete path (dir by dir)
 

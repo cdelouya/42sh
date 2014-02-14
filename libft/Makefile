@@ -6,7 +6,7 @@
 #    By: hestela <hestela@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/11/20 08:42:55 by hestela           #+#    #+#              #
-#    Updated: 2014/02/07 12:14:07 by hestela          ###   ########.fr        #
+#    Updated: 2014/02/14 02:13:01 by hestela          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -150,7 +150,9 @@ SOURCES = ft_atoi.c \
 		ft_output4_fd.c \
 		ft_output5_fd.c \
 		ft_factorial.c \
-		ft_getenv.c
+		ft_getenv.c \
+		ft_match.c \
+		ft_str_multi_join.c
 
 HEADERS = libft.h
 
