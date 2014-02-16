@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/02 22:45:07 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/16 04:35:19 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/16 13:45:42 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <signal.h>
@@ -29,7 +29,7 @@ void			ft_kill(int sig)
 	if (g_env.in_exec)
 	{
 		kill(g_env.thread, SIGKILL);
-		ft_printf("%$\n42sh: Killed > %s%$", INFOS_CLR, g_env.in_exec, C_RESET);
+		ft_printf("%$\n42sh: Killed > %s%$\n", INFOS_CLR, g_env.in_exec, C_RESET);
 		g_env.in_exec = NULL;
 		if (g_env.pid_list)
 			ft_got_node_nbr();

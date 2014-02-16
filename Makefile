@@ -6,7 +6,7 @@
 #    By: hestela <hestela@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/01/28 10:07:14 by hestela           #+#    #+#              #
-#    Updated: 2014/02/16 04:04:20 by hestela          ###   ########.fr        #
+#    Updated: 2014/02/16 14:36:49 by hestela          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -58,7 +58,8 @@ SOURCES = src/main.c \
 		src/autocomp_file.c \
 		src/autocomp_cmd.c \
 		src/autocomp_tool_1.c \
-		src/autocomp_tool_2.c
+		src/autocomp_tool_2.c \
+		src/autocomp_list.c
 
 HEADERS = inc/
 

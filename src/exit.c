@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 19:07:43 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/13 01:39:08 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/16 14:48:46 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
@@ -28,7 +28,7 @@ void			ft_exit(char **av, int type)
 	if (g_env.pid_list)
 	{
 		tputs(tgetstr("sc", NULL), 1, ft_put);
-		ft_printf("%$42sh: %s%s" , F_WHITE, "You have suspended jobs."\
+		ft_printf("%$42sh: %s%s" , INFOS_CLR, "You have suspended jobs."\
 			, " Do you really want to quit? (y/n)");
 		while (*answer != 'n' && *answer != 'y')
 			read(0, answer, 1);
@@ -38,7 +38,7 @@ void			ft_exit(char **av, int type)
 			tputs(tgetstr("rc", NULL), 1, ft_put);
 			if (type == 0)
 				ft_printf("%$%s 42sh (%T)%% "\
-					, F_CYAN, ft_getenv(g_env.env, "USER"));
+					, PROMPT_CLR, ft_getenv(g_env.env, "USER"));
 			return ;
 		}
 		ft_putchar('\n');
@@ -100,6 +100,15 @@ static void		ft_free_history(void)
 
 static void		ft_kill_zombies(void)
 {
+	t_comp_lst		*node;
+
+	if (g_comp_lst)
+	{
+		node = g_comp_lst;
+		g_comp_lst = g_comp_lst->next;
+		free(node->str);
+		free(node);
+	}
 	if (g_env.pid_list)
 	{
 		g_env.pid_list = g_env.pid_list->start;

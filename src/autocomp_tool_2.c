@@ -6,72 +6,10 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/16 03:59:42 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/16 04:02:13 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/16 14:34:57 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <stdlib.h>
-#include <dirent.h>
-#include <sys/stat.h>
 #include "libft.h"
-#include "42sh.h"
-
-static void		ft_add_node(char *ent, char *new, t_stat file_stats);
-
-void			ft_add_comp_list(char *path, char *to_comp)
-{
-	DIR			*dir;
-	t_dirent	*ent;
-	char		*new;
-	t_stat		file_stats;
-
-	dir = opendir(path);
-	if (dir)
-	{
-		ent = readdir(dir);
-		ent = readdir(dir);
-		ent = readdir(dir);
-		while (ent)
-		{
-			if (ft_match(ent->d_name, to_comp))
-			{
-				new = ft_strjoin(path, ent->d_name);
-				stat(new, &file_stats);
-				ft_add_node(ent->d_name, new, file_stats);
-			}
-			ent = readdir(dir);
-		}
-		if (g_comp_lst)
-			g_comp_lst = g_comp_lst->start;
-		closedir(dir);
-	}
-}
-
-static void		ft_add_node(char *ent, char *new, t_stat file_stats)
-{
-	free(new);
-	if (S_ISDIR(file_stats.st_mode))
-		new = ft_strjoin(ent, "/");
-	else
-		new = ft_strdup(ent);
-	if (!g_comp_lst)
-	{
-		g_comp_lst = malloc(sizeof(t_comp_lst));
-		g_comp_lst->start = g_comp_lst;
-		g_comp_lst->next = NULL;
-		g_comp_lst->str = ft_strdup(new);
-	}
-	else
-	{
-		while (g_comp_lst->next)
-			g_comp_lst = g_comp_lst->next;
-		g_comp_lst->next = malloc(sizeof(t_comp_lst));
-		g_comp_lst->next->start = g_comp_lst->start;
-		g_comp_lst = g_comp_lst->next;
-		g_comp_lst->next = NULL;
-		g_comp_lst->str = ft_strdup(new);
-	}
-	free(new);
-}
 
 char			*ft_get_comp_path(char *begin)
 {

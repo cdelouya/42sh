@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/16 03:50:46 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/16 03:53:24 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/16 15:26:29 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -89,19 +89,23 @@ static char		*ft_comp_file_2(char *beg)
 {
 	char		*path;
 	char		*to_comp;
+	char        *newpath;
 
 	if (!ft_strchr(beg, '/'))
-	{
 		to_comp = ft_strjoin(beg, "*");
-		path = NULL;
-	}
 	else
-	{
-		path = ft_get_comp_path(beg);
 		to_comp = ft_get_comp_rest(beg);
-	}
+	path = (ft_strchr(beg, '/') ? ft_get_comp_path(beg) : NULL);
 	if (path)
-		ft_add_comp_list(path, to_comp);
+	{
+		if (path[0] == '~' && path[1] == '/')
+			newpath = ft_str_multi_join(3, ft_getenv(g_env.env, "HOME")\
+				, "/", path + 2);
+		else
+			newpath = ft_strdup(path);
+		ft_add_comp_list(newpath, to_comp);
+		free(newpath);
+	}
 	else
 		ft_add_comp_list("./", to_comp);
 	free(to_comp);
