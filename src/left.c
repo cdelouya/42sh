@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/15 12:51:18 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/11 13:48:48 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/16 04:32:32 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <fcntl.h>
@@ -43,7 +43,7 @@ void				ft_exec_left(char **av1, char **av2, char **env)
 		ft_left(cmd1, cmd2, env, av1);
 	if (!cmd2)
 		ft_printf_fd(2, "%$42sh: file not found: %s%$\n"\
-			, F_RED, av2[0], F_WHITE);
+			, ERROR_CLR, av2[0], TEXT_CLR);
 }
 
 static int		ft_check_path(char *file)
@@ -96,7 +96,7 @@ static int		ft_check_dir(char *path, char *file)
 		if (S_ISDIR(file_stat.st_mode) || !(file_stat.st_mode & S_IRUSR))
 		{
 			ft_printf_fd(2, "%$42sh: permission denied: %s%$\n"\
-				, F_RED, path, F_WHITE);
+				, ERROR_CLR, path, TEXT_CLR);
 			return (0);
 		}
 	}
@@ -105,7 +105,7 @@ static int		ft_check_dir(char *path, char *file)
 		if (!(file_stat.st_mode & S_IXUSR))
 		{
 			ft_printf_fd(2, "%$42sh: permission denied: %s%$\n" \
-				, F_RED, path, F_WHITE);
+				, ERROR_CLR, path, TEXT_CLR);
 			return (0);
 		}
 	}

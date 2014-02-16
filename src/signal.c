@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/02 22:45:07 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/13 13:33:12 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/16 04:35:19 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <signal.h>
@@ -29,7 +29,7 @@ void			ft_kill(int sig)
 	if (g_env.in_exec)
 	{
 		kill(g_env.thread, SIGKILL);
-		ft_printf("%$\n42sh: Killed > %s%$", F_GREEN, g_env.in_exec, C_RESET);
+		ft_printf("%$\n42sh: Killed > %s%$", INFOS_CLR, g_env.in_exec, C_RESET);
 		g_env.in_exec = NULL;
 		if (g_env.pid_list)
 			ft_got_node_nbr();
@@ -37,7 +37,7 @@ void			ft_kill(int sig)
 	else
 	{
 		ft_printf("%$\n%s 42sh (%T)%s "\
-			, F_CYAN, ft_getenv(g_env.env, "USER"), "%");
+			, PROMPT_CLR, ft_getenv(g_env.env, "USER"), "%");
 		i = ft_strlen(*g_env.saved_line);
 		free(*g_env.saved_line);
 		*g_env.saved_line = ft_strdup("\0");
@@ -56,7 +56,7 @@ void			ft_suspend(int sig)
 		ft_add_to_pid_list(g_env.thread, g_env.in_exec);
 		ioctl(0, TIOCSTI, cp);
 		ft_printf("%$\n42sh: Suspended > %s%$\n"\
-			, F_GREEN, g_env.in_exec, C_RESET);
+			, INFOS_CLR, g_env.in_exec, C_RESET);
 		g_env.in_exec = NULL;
 	}
 }

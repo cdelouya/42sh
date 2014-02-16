@@ -14,6 +14,7 @@ edit line commands:
             up  >  previous command
           down  >  next command
         ctrl_d  >  terminate line with nul character
+           tab  >  autocompletion
 
 builtins:
 
@@ -44,7 +45,7 @@ redirections:
 -> you can write command without spaces around operators.
 		ex: ls|cat -e;echo ">>\";|"
 -> alias are replaced
--> ~ is replaced
+-> ~ are replaced
 -> * are replaced
 -> environement variables are replaced
 -> verifying permission for complete path (dir by dir)

@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/11 00:00:54 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/11 13:38:55 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/16 04:22:10 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
@@ -42,7 +42,7 @@ char			*ft_check_exist(char *cmd)
 		return (NULL);
 	}
 	ft_printf_fd(2, "%$42sh: command not found: %s%$\n"\
-		, F_RED, way, F_WHITE);
+		, ERROR_CLR, way, TEXT_CLR);
 	free(way);
 	return (NULL);
 }
@@ -130,7 +130,7 @@ static int		ft_check_dir(char *path, char *file)
 			if (access(file, F_OK))
 				return (2);
 			ft_printf_fd(2, "%$42sh: permission denied: %s%$\n"\
-				, F_RED, file, F_WHITE);
+				, ERROR_CLR, file, TEXT_CLR);
 			return (0);
 		}
 	}
@@ -139,7 +139,7 @@ static int		ft_check_dir(char *path, char *file)
 		if (!(file_stat.st_mode & S_IXUSR))
 		{
 			ft_printf_fd(2, "%$42sh: permission denied: %s%$\n" \
-				, F_RED, path, F_WHITE);
+				, ERROR_CLR, path, TEXT_CLR);
 			return (0);
 		}
 	}

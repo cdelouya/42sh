@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/13 00:50:53 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/13 11:46:18 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/16 04:12:12 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -17,7 +17,7 @@ static void		ft_check_alias(char **line, char *alias, char *string, int i);
 static void		ft_instring(char *quote, char c, int d);
 static void		ft_copy_alias(char *buf, char *string, int *i);
 static void		ft_free_and_dup(char **line, char *buf, int i);
-	
+
 void			ft_replace_alias(char **line)
 {
 	t_alias_lst		*start;
@@ -39,6 +39,7 @@ void			ft_replace_alias(char **line)
 		g_env.alias_lst = start;
 	}
 }
+
 static void		ft_free_and_dup(char **line, char *buf, int i)
 {
 	buf[i] = '\0';
@@ -58,7 +59,7 @@ static void		ft_copy_alias(char *buf, char *string, int *i)
 		string++;
 	}
 }
- 
+
 static void		ft_check_alias(char **line, char *alias, char *string, int i)
 {
 	char		buf[2048];
@@ -86,7 +87,7 @@ static void		ft_check_alias(char **line, char *alias, char *string, int i)
 	}
 	ft_free_and_dup(line, buf, i);
 }
- 
+
 static void		ft_instring(char *quote, char c, int d)
 {
 	if (*quote == '\0' && ft_strchr("\"'", c))

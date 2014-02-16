@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/15 12:48:27 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/11 13:47:04 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/16 04:34:57 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <fcntl.h>
@@ -69,10 +69,11 @@ static int		ft_check_dir(char *path, char *file)
 	stat(path, &file_stat);
 	if (ft_strlen(path) == ft_strlen(file))
 	{
-		if (S_ISDIR(file_stat.st_mode) || !(file_stat.st_mode & S_IWUSR))
+		if ((S_ISDIR(file_stat.st_mode) || !(file_stat.st_mode & S_IWUSR))
+			&& access(path, F_OK) == 0)
 		{
 			ft_printf_fd(2, "%$42sh: permission denied: %s%$\n"\
-				, F_RED, path, F_WHITE);
+				, ERROR_CLR, path, TEXT_CLR);
 			return (0);
 		}
 	}
@@ -81,7 +82,7 @@ static int		ft_check_dir(char *path, char *file)
 		if (!(file_stat.st_mode & S_IXUSR))
 		{
 			ft_printf_fd(2, "%$42sh: permission denied: %s%$\n" \
-				, F_RED, path, F_WHITE);
+				, ERROR_CLR, path, TEXT_CLR);
 			return (0);
 		}
 	}
@@ -121,7 +122,7 @@ static void		ft_right_d(char *cmd1, char *cmd2, char **env, char **av1)
 	if (fd < 0)
 	{
 		ft_printf_fd(2, "%$42sh: permission denied: %s%$\n"\
-			, F_RED, cmd2, F_WHITE);
+			, ERROR_CLR, cmd2, TEXT_CLR);
 		return ;
 	}
 	thread = fork();

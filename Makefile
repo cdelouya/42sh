@@ -6,7 +6,7 @@
 #    By: hestela <hestela@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/01/28 10:07:14 by hestela           #+#    #+#              #
-#    Updated: 2014/02/14 04:11:24 by hestela          ###   ########.fr        #
+#    Updated: 2014/02/16 04:04:20 by hestela          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -53,7 +53,12 @@ SOURCES = src/main.c \
 		src/replace_star.c \
 		src/replace_star_suite.c \
 		src/split_args.c \
-		src/echo.c
+		src/echo.c \
+		src/autocomp.c \
+		src/autocomp_file.c \
+		src/autocomp_cmd.c \
+		src/autocomp_tool_1.c \
+		src/autocomp_tool_2.c
 
 HEADERS = inc/
 
@@ -65,7 +70,7 @@ LIBRARY = -lft
 
 LIBNAME = lib/libft.a
 
-WFLAGS = -g -Werror -Wall -Wextra
+WFLAGS = -Werror -Wall -Wextra
 
 all: $(NAME)
 

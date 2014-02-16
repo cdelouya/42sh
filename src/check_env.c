@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/08 09:34:22 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/10 20:43:36 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/16 04:21:18 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -25,8 +25,8 @@ void			ft_check_env(void)
 		g_env.env = ft_array_str_dup(environ);
 	if (!g_env.env)
 	{
-		ft_printf("%$42sh: Need environnement to work correctly\n%$"\
-			, F_RED, F_WHITE);
+		ft_printf_fd(2, "%$42sh: Need environnement to work correctly\n%$"\
+			, ERROR_CLR, TEXT_CLR);
 		ft_printf("exit\n");
 		exit(EXIT_FAILURE);
 	}
@@ -45,7 +45,7 @@ static void		ft_check_have_term(char **av)
 {
 	if (!ft_getenv(g_env.env, "TERM"))
 	{
-		ft_printf("%$42sh: Unknow Term\n%$", F_RED, F_WHITE);
+		ft_printf_fd(2, "%$42sh: Unknow Term\n%$", ERROR_CLR, TEXT_CLR);
 		ft_printf("exit\n");
 		exit(EXIT_FAILURE);
 	}

@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 15:39:58 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/14 04:09:34 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/16 04:42:10 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,13 +79,26 @@ typedef struct				s_quote
 	struct s_quote			*prev;
 }							t_quote;
 
+typedef struct				s_comp_lst
+{
+	char					*str;
+	struct s_comp_lst		*next;
+	struct s_comp_lst		*start;
+}							t_comp_lst;
+
 extern char					**environ;
 t_env						g_env;
 t_win						g_ws;
 int							g_prompt_len;
+t_comp_lst					*g_comp_lst;
 
 # define WRITE 1
 # define READ 0
+
+# define PROMPT_CLR F_BLUE
+# define TEXT_CLR F_CYAN
+# define ERROR_CLR F_RED
+# define INFOS_CLR F_GREEN
 
 # define TAB 900000
 # define LEFT 279168000
@@ -114,7 +127,7 @@ void		ft_add_char(char **line, int position, char c);
 int			ft_put(int c);
 void		ft_get_input(char **line);
 void		ft_check_env(void);
-void		ft_check_key(char *buf, char **line, int *position);
+void		ft_check_key(char *buf, char **line, int *position, int *comp);
 void		ft_cut(char **line, int *position);
 void		ft_copy(char **line, int position);
 void		ft_paste(char **line, int *position);
@@ -168,5 +181,16 @@ char		*ft_replace_star_2(char *path, char *stared, int *j, char *str);
 void		ft_update_stared_line(char **line, char *new, int i);
 char		**ft_split_args(char *str);
 int			ft_echo(char **av);
+void		ft_autocomp(char **line, int *position, int *autocomp);
+void		ft_comp_path(char **ln, int pv, char *buf);
+void		ft_add_comp_list(char *path, char *to_comp);
+void		ft_comp_refresh(char **line, char *buf, int *ps, int pv);
+void		ft_comp_current_dir(char **ln, int *ps, int pv, int *comp);
+char		*ft_get_comp_path(char *begin);
+char		*ft_get_comp_rest(char *begin);
+void		ft_comp_file_3(char **ln, int pv, int *ps, char *path);
+void		ft_comp_file(char **ln, int *ps, int pv, int *comp);
+void		ft_complete_all_cmd(char **line, int *ps, int pv, int *autocomp);
+void		ft_comp_cmd(char **ln, int *ps, int pv, int *comp);
 
 #endif /* !__42SH_H__ */

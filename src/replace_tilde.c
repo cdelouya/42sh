@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/11 22:47:47 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/13 03:07:32 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/16 04:14:33 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -51,7 +51,7 @@ static int		ft_count_tilde(char *s)
 			quote = *s;
 		else if (quote == *s && *(s - 1) != '\\')
 			quote = '\0';
-		if (*s == '~' && ft_strchr(";\"'`;<>| ", *(s - 1)) && quote == '\0')
+		if (*s == '~' && ft_strchr(";\"'`<>| ", *(s - 1)) && quote == '\0')
 			count++;
 		s++;
 	}

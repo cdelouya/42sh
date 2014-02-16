@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/05 15:38:35 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/07 18:47:17 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/16 04:37:10 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -73,11 +73,11 @@ static void			ft_check_instring(char quote, t_quote *list)
 		if (list)
 			g_prompt_len += ft_putchar(' ');
 		if (quote == '\'')
-			g_prompt_len += ft_printf("%$quote", F_CYAN);
+			g_prompt_len += ft_printf("%$quote", PROMPT_CLR);
 		else if (quote == '"')
-			g_prompt_len += ft_printf("%$dquote", F_CYAN);
+			g_prompt_len += ft_printf("%$dquote", PROMPT_CLR);
 		else if (quote == '`')
-			g_prompt_len += ft_printf("%$bquote", F_CYAN);
+			g_prompt_len += ft_printf("%$bquote", PROMPT_CLR);
 	}
 }
 
@@ -96,9 +96,9 @@ static void			ft_final_check(t_quote **alist, char quote)
 			if ((*alist)->prev)
 				g_prompt_len += ft_putchar(' ');
 			if ((*alist)->c == '(')
-				g_prompt_len += ft_printf("%$subsh", F_CYAN);
+				g_prompt_len += ft_printf("%$subsh", PROMPT_CLR);
 			else if ((*alist)->c == '{')
-				g_prompt_len += ft_printf("%$cursh", F_CYAN);
+				g_prompt_len += ft_printf("%$cursh", PROMPT_CLR);
 			*alist = (*alist)->next;
 		}
 		*alist = start;

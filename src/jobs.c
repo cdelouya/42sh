@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/03 09:21:19 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/13 13:26:00 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/16 04:26:52 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <signal.h>
@@ -23,7 +23,7 @@ void				ft_print_job_list(void)
 	t_pidlst		*start;
 
 	if (!g_env.pid_list)
-		ft_printf("%$jobs: No suspended jobs%$\n", F_RED, F_WHITE);
+		ft_printf_fd(2, "%$jobs: No suspended jobs%$\n", ERROR_CLR, TEXT_CLR);
 	else
 	{
 		start = g_env.pid_list->start;
@@ -74,7 +74,8 @@ static int			ft_got_id(char **av)
 		}
 		if (!num)
 		{
-			ft_printf("%$fg: Job not found: %s%$\n", F_RED, av[1], C_RESET);
+			ft_printf_fd(2, "%$fg: Job not found: %s%$\n"\
+				, ERROR_CLR, av[1], TEXT_CLR);
 			return (-1);
 		}
 		num = ft_atoi(av[1]);
@@ -94,7 +95,7 @@ static void			ft_do_resume(int num)
 	signal(SIGINT, ft_kill);
 	tcsetattr(0, 0, g_env.term);
 	ft_got_pid_node(num);
-	ft_printf("%$42sh: Resume > %s%$\n", F_GREEN, g_env.in_exec, F_WHITE);
+	ft_printf("%$42sh: Resume > %s%$\n", INFOS_CLR, g_env.in_exec, TEXT_CLR);
 	if (ft_strcmp(g_env.in_exec, "emacs") == 0)
 		ft_putstr(C_RESET);
 	kill(g_env.thread, SIGCONT);
@@ -117,7 +118,7 @@ void				ft_resume(char **av)
 
 	if (!g_env.pid_list)
 	{
-		ft_printf("%$fg: No current job%$\n", F_RED, C_RESET);
+		ft_printf_fd(2, "%$fg: No current job%$\n", ERROR_CLR, C_RESET);
 		return ;
 	}
 	num = ft_got_id(av);
@@ -125,7 +126,7 @@ void				ft_resume(char **av)
 		return ;
 	if (num != 0 && !ft_check_exist_job(num))
 	{
-		ft_printf("%$fg: Job not found: %d%$\n", F_RED, num, C_RESET);
+		ft_printf_fd(2, "%$fg: Job not found: %d%$\n", ERROR_CLR, num, C_RESET);
 		return ;
 	}
 	ft_do_resume(num);

@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 12:35:39 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/10 12:54:33 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/16 04:09:05 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -15,11 +15,15 @@
 static int		ft_getkey(char *str);
 static void		ft_check_key_suite(int key, int *pos, char **line, char *buf);
 
-void			ft_check_key(char *buf, char **line, int *position)
+void			ft_check_key(char *buf, char **line, int *position, int *comp)
 {
-	int			key;
+	int				key;
 
 	key = ft_getkey(buf);
+	if (key == TAB)
+		ft_autocomp(line, position, comp);
+	else
+		*comp = 0;
 	if (key == UP && g_env.quote_wait == 0)
 		ft_previous_cmd(position, line);
 	if (key == DOWN && g_env.quote_wait == 0)
@@ -34,15 +38,15 @@ void			ft_check_key(char *buf, char **line, int *position)
 		ft_move_to_word_L(position, line);
 	if (key == CTRL_RIGHT)
 		ft_move_to_word_R(position, line);
-	if (key == CTRL_UP)
-		ft_move_up(position, line);
-	if (key == CTRL_DW)
-		ft_move_down(position, line);
 	ft_check_key_suite(key, position, line, buf);
 }
 
 static void		ft_check_key_suite(int key, int *pos, char **line, char *buf)
 {
+	if (key == CTRL_UP)
+		ft_move_up(pos, line);
+	if (key == CTRL_DW)
+		ft_move_down(pos, line);
 	if (key == CTRL_A || key == HOME)
 		ft_move_to_beg(pos, *line);
 	if (key == CTRL_E || key == END)

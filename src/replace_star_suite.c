@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/02/14 04:02:14 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/14 04:19:29 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/14 15:00:33 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
@@ -24,26 +24,26 @@ char			*ft_replace_star_2(char *path, char *stared, int *j, char *str)
 	DIR			*dir;
 	t_dirent	*file;
 	char		new[4096];
-	int			i;
+	int			count;
 
-	i = 0;
+	count = 0;
 	ft_bzero(new, 4096);
 	rest = ft_get_rest(str, j);
-	if (path)
-		dir = opendir(path);
-	else
-		dir = opendir(".");
+	dir = (path ? opendir(path) : opendir("."));
 	file = readdir(dir);
 	while (file)
 	{
 		if (ft_match(file->d_name, stared) && file->d_name[0] != '.')
+		{
 			ft_update_new(path, file->d_name, rest, new);
+			count++;
+		}
 		file = readdir(dir);
 	}
 	if (rest)
 		free(rest);
 	closedir(dir);
-	return (ft_strdup(new));
+	return (count ? ft_strdup(new) : NULL);
 }
 
 void			ft_update_stared_line(char **line, char *new, int i)

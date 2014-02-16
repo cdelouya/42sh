@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/28 10:08:01 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/13 03:04:46 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/16 04:19:27 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <fcntl.h>
@@ -41,7 +41,7 @@ int				main(void)
 	while (1)
 	{
 		g_prompt_len = ft_printf("%$%s 42sh (%T)%% "\
-			, F_CYAN, ft_getenv(g_env.env, "USER"));
+			, PROMPT_CLR, ft_getenv(g_env.env, "USER"));
 		g_env.in_histo = 0;
 		ft_update_cmd(&str);
 		ft_update_history(str);
@@ -79,7 +79,7 @@ static void		ft_update_cmd(char **line)
 		free(tmp);
 		free(tmp2);
 	}
-	ft_printf("%$", F_WHITE);
+	ft_printf("%$", TEXT_CLR);
 }
 
 static void		ft_exec_list(t_cmd *list)
@@ -113,7 +113,7 @@ static void		ft_exec_redir(char *cmd1, char *cmd2, int redir)
 
 	if (ft_is_empty(cmd1) || ft_is_empty(cmd2))
 	{
-		ft_printf("%$42sh: parse error%$\n", F_RED, F_WHITE);
+		ft_printf_fd(2, "%$42sh: parse error%$\n", ERROR_CLR, TEXT_CLR);
 		return ;
 	}
 	f[0] = &ft_exec_pipe;

@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 11:46:28 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/11 20:38:38 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/16 04:10:27 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <signal.h>
@@ -17,12 +17,14 @@
 #include "libft.h"
 #include "42sh.h"
 
-static void		ft_read(char **line, int *position);
+static void		ft_read(char **line, int *position, int *autocomp);
 
 void			ft_get_input(char **line)
 {
-	int			position;
+	int				position;
+	static int		autocomp;
 
+	autocomp = 0;
 	signal(SIGTSTP, ft_suspend);
 	position = 0;
 	if (*line)
@@ -31,16 +33,16 @@ void			ft_get_input(char **line)
 		*line = NULL;
 	}
 	*line = ft_strdup("\0");
-	ft_read(line, &position);
+	ft_read(line, &position, &autocomp);
 	while (position < (int)ft_strlen(*line))
 		ft_move_right(&position, *line);
 	ft_putchar('\n');
 }
 
-static void		ft_read(char **line, int *position)
+static void		ft_read(char **line, int *position, int *autocomp)
 {
-	int			ret;
-	char		*buf;
+	int				ret;
+	char			*buf;
 
 	ret = 1;
 	buf = ft_memalloc(42);
@@ -52,6 +54,7 @@ static void		ft_read(char **line, int *position)
 		buf[ret] = '\0';
 		if (ft_isprint(*buf))
 		{
+			*autocomp = 0;
 			ft_putchar(*buf);
 			ft_add_char(line, *position, *buf);
 			(*position)++;
@@ -59,7 +62,7 @@ static void		ft_read(char **line, int *position)
 				tputs(tgetstr("sf", NULL), 1, ft_put);
 		}
 		else if (*buf != '\n')
-			ft_check_key(buf, line, position);
+			ft_check_key(buf, line, position, autocomp);
 	}
 	free(buf);
 }

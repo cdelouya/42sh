@@ -6,7 +6,7 @@
 /*   By: hestela <hestela@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/01/29 18:10:49 by hestela           #+#    #+#             */
-/*   Updated: 2014/02/11 22:40:27 by hestela          ###   ########.fr       */
+/*   Updated: 2014/02/16 04:31:39 by hestela          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
@@ -35,10 +35,10 @@ void			ft_cd(char **av, char **env)
 	else if (*av[1] == '-')
 		ft_option(env, &change);
 	else if (ft_array_str_len(av) > 3)
-		ft_printf_fd(2, "%$cd: too many arguments\n%$", F_RED, F_WHITE);
+		ft_printf_fd(2, "%$cd: too many arguments\n%$", ERROR_CLR, TEXT_CLR);
 	else if (ft_array_str_len(av) > 2)
 		ft_printf_fd(2, "%$cd: string not in pwd: %s%$\n"\
-			, F_RED, av[1], F_WHITE);
+			, ERROR_CLR, av[1], TEXT_CLR);
 	else
 		ft_path(av, &change);
 	if (change)
@@ -79,10 +79,10 @@ static void		ft_check_permission(char **av)
 {
 	if (access(av[1], F_OK) == 0)
 		ft_printf_fd(2, "%$cd: permission denied: %s\n%$"\
-			, F_RED, av[1], F_WHITE);
+			, ERROR_CLR, av[1], TEXT_CLR);
 	else
 		ft_printf_fd(2, "%$cd: no such file or directory: %s\n%$"\
-			, F_RED, av[1], F_WHITE);
+			, ERROR_CLR, av[1], TEXT_CLR);
 }
 
 static void		ft_apply_changes(char **env)
